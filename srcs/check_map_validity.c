@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:28:33 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/08/20 18:51:19 by cjulienn         ###   ########.fr       */
+/*   Updated: 2021/08/21 12:36:57 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,29 +28,143 @@ void	map_error_messages(int error_type) // change error message
 		printf("No exit present\n");
 	if (error_type == 6) // non rectangular map
 		printf("Non rectangular map\n");
+	if (error_type == 7)
+		printf("invalid character used in map\n");
 }
 
-int	check_if_blank_space(char *line) // check if blank space in every line
+int	check_if_map_rectangular(char *line)
 {
-	int	blank_spaces;
-	int	i;
+	static int	line_len = 0;
+	static int	errors = 0;
+	int			i;
+	size_t		current_line_len;
 
-	blank_spaces = 0;
-	i = 0;
-	if (!line) // if line == NULL (pas de map ou ligne en trop)
-		return (1);
-	while (line[i])
+	current_line_len = strlen(line);
+	if (line_len = 0)
+		line_len = current_line_len;
+	else
 	{
-		if (line[i] = ' ')
-			blank_spaces++;
+		if (current_line_len != line_len)
+			errors++;
+	}
+	return (errors);	
+}
+
+int	check_if_walls(char *line) // find a wy to find if next line is full of 1
+{
+	static int	line_nbr = 0;
+	static int	breaches = 0;
+	int 		i;
+	
+	if (!line)
+		return (breaches);
+	i = 0;
+	while (line_nbr == 0 && line[i])
+	{
+		if (line[i] != '1')
+			breaches++;
 		i++;
 	}
-	if (blank_spaces > 0)
+	if (line_nbr != 0)
 	{
-		map_error_messages(1); // print error message
-		return (1); // return 1 if blank space
+		if (line[0] != '1')
+			breaches++;
+		if (line[strlen(line) - 1] != '1')
+			breaches++;
 	}
-	return (0);	
+	// check if map last line is fill of 1
+	line_nbr++;
+	return (breaches);
+}
+
+int	check_if_coll(char *line)
+{
+	static int	coll_num = 0;
+	int			i;
+	
+	if (!line)
+		return (coll_num);
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == 'C')
+			coll_num++;
+		i++;
+	}
+	return (coll_num);
+}
+
+int	check_if_exit(char *line)
+{
+	static int	exit_num = 0;
+	int			i;
+	
+	if (!line)
+		return (exit_num);
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == 'E')
+			exit_num++;
+		i++;
+	}
+	return (exit_num);
+}
+
+int check_if_starting_pos(char *line)
+{
+	static int	sp_num = 0;
+	int			i;
+	
+	if (!line)
+		return (sp_num);
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == 'P')
+			sp_num++;
+		i++;
+	}
+	return (sp_num);
+}
+
+int	check_invalid_char(char *line)
+{
+	static int	inval_char = 0;
+	int			i;
+	
+	if (!line)
+		return (inval_char);
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == 'P')
+			inval_char++;
+		i++;
+	}
+	return (inval_char);
+}
+
+int	check_if_blank_space(char *line)
+{
+	static int	bl_sp = 0;
+	int			i;
+	
+	if (!line)
+		return (bl_sp);
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == ' ')
+			bl_sp++;
+		i++;
+	}
+	return (bl_sp);
+}
+
+void	check_errors(char *line)
+{
+		
 }
 
 int	check_if_map_valid(char **argv) // use gnl to read every line of the map
@@ -66,14 +180,17 @@ int	check_if_map_valid(char **argv) // use gnl to read every line of the map
 	next_line = NULL;
 	error = 0;
 	stop = 1; // enter in the loop
-	while(next_line != NULL && stop == 0)
+	while(next_line != NULL || stop == 1)
 	{
 		stop = 0; // stop the entry if next_line == NULL
 		next_line = get_next_line(fd); // read_line
-		if (check_if_blank_space(next_line) == 1)
-			error++;
-		if ()
-			error++;
+		check_if_blank_space(next_line);
+		check_invalid_char(next_line);
+		check_if_starting_pos(next_line);
+		check_if_exit(next_line);
+		check_if_coll(next_line);
+		check_if_map_rectangular(next_line);
 	}
+	check_errors(next_line);
 	return (0); // if map valid
 }
