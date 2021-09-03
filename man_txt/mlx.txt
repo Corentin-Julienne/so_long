@@ -57,6 +57,7 @@ mlx_new_image : manipulate images
 mlx_loop : handle keyboard or mouse events
 
 LINKING MiniLibX
+
 To use MiniLibX functions, you may need to link
 your software with several libraries, including the MiniLibX library itself.
 On Unix/Linux, simply add the following arguments at linking time:

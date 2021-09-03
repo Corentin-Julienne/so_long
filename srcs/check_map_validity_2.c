@@ -6,56 +6,60 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 17:55:45 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/09/02 20:03:58 by cjulienn         ###   ########.fr       */
+/*   Updated: 2021/09/03 16:24:42 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void	is_format_ber(char **argv,t_map_err *err)
+void	is_format_ber(char **argv, t_map_parse *map)
 {
-	char	*map;
-	
-	map = argv[1];
-	if (!map)
-		err->ber_format = 0;
-	if (map)
+	char	*title;
+	int		length;
+
+	title = argv[1];
+	if (!title)
+		map->ber_format = 0;
+	else
 	{
-		if (ft_strlen(map >= 5) )
-			err->ber_format = 1;
+		length = ft_strlen(title);
+		if (length < 5)
+			map->ber_format = 0;
+		if (ft_strcmp(map + (length - 4)) != 0)
+			map->ber_format = 0;
 	}
-	if (err->ber_format != 1)
+	if (map->ber_format != 1)
 	{
 		printf("Error\nMap is not in ber format\n");
-		free(err);
+		free(map);
 		exit(0);
 	}
 }
 
-void	check_errors(t_map_err *err)
+void	check_errors(t_map_parse *map)
 {
-	if (err->nb_err_walls != 0)
+	if (map->nb_err_walls != 0)
 		map_error_messages(1);
-	if (err->nb_psp != 1)
+	if (map->nb_psp != 1)
 		map_error_messages(2);
-	if (err->nb_coll <= 0)
+	if (map->nb_coll <= 0)
 		map_error_messages(3);
-	if (err->nb_exit <= 0)
+	if (map->nb_exit <= 0)
 		map_error_messages(4);
-	if (err->nb_rect_error != 0)
+	if (map->nb_rect_error != 0)
 		map_error_messages(5);
-	if (err->nb_inv_char != 0)
+	if (map->nb_inv_char != 0)
 		map_error_messages(6);
-	if (err)
+	if (map)
 		map_error_messages(7);
-	if (err->nb_err_walls != 0 || err->nb_psp != 1 || err->nb_coll <= 0
-		|| err->nb_exit <= 0 || err->nb_rect_error != 0
-		|| err->nb_inv_char != 0)
+	if (map->nb_err_walls != 0 || map->nb_psp != 1 || map->nb_coll <= 0
+		|| map->nb_exit <= 0 || map->nb_rect_error != 0
+		|| map->nb_inv_char != 0)
 	{
-		free(err);
+		free(map);
 		exit(0);
 	}
-	free(err);
+	free(map);
 }
 
 void	map_error_messages(int error_type)
