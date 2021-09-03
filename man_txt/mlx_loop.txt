@@ -67,7 +67,7 @@ with MacOS, just try :) ), (x, y) are the coordinates of the mouse click in the 
 tells you which mouse button was pressed.
 
 GOING FURTHER WITH EVENTS
-The MiniLibX provides a much generic access to other available events. The mlx.hinclude define
+The MiniLibX provides a much generic access to other available events. The mlx.h include define
 mlx_hook() in the same manner mlx_*_hook functions work. The event and mask values
 will be taken from the X11 include file "X.h". Some MacOS events are mapped
 to these values, when it makes sense, and the mask is not used in MacOS.
