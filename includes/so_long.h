@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:28:29 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/09/02 19:32:38 by cjulienn         ###   ########.fr       */
+/*   Updated: 2021/09/02 19:37:56 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,6 @@ typedef struct	s_map_err
 	int			nb_err_walls;
 }				t_map_err;
 
-typedef struct	s_parse
-{
-	char		**map;
-	char		*map_lines;
-}				t_parse;
-
 // so long
 
 void	initialize_struct(t_map_err *err);
@@ -47,9 +41,9 @@ void	check_errors(t_map_err *err);
 void	map_error_messages(int error_type);
 
 void	is_map_rectangular(const char *line, t_map_err *err);
-void	is_walls(const char *line, t_map_err *err);
+// void	is_walls(const char *line, t_map_err *err);
 void	count_items(const char *line, t_map_err *err);
-void	check_validity_then_parse(char **argv, t_map_err *err);
+void	check_map_validity(char **argv, t_map_err *err);
 
 // player_moves
 

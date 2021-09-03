@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:28:33 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/09/02 19:12:05 by cjulienn         ###   ########.fr       */
+/*   Updated: 2021/09/02 19:38:25 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ void	is_map_rectangular(const char *line, t_map_err *err)
 	iter++;
 }
 
-void	is_walls(const char *line, t_map_err *err)
-{
-	// TO IMPLEMENT
-	if (!line)
-		return ;
-	return ; // testing purposes, to implement full function after
-}
+// void	is_walls(const char *line, t_map_err *err)
+// {
+// 	// TO IMPLEMENT
+// 	if (!line)
+// 		return ;
+// 	return ; // testing purposes, to implement full function after
+// }
 
 void	count_items(const char *line, t_map_err *err)
 {
@@ -59,7 +59,7 @@ void	count_items(const char *line, t_map_err *err)
 	}	
 }
 
-void	check_validity_then_parse(char **argv, t_map_err *err)
+void	check_map_validity(char **argv, t_map_err *err)
 {
 	char	*next_line;
 	int		stop;
@@ -76,7 +76,7 @@ void	check_validity_then_parse(char **argv, t_map_err *err)
 		next_line = get_next_line(fd);
 		count_items(next_line, err);
 		is_map_rectangular(next_line, err);
-		is_wall(next_line, err);
+		// is_wall(next_line, err);
 	}
 	check_errors(err);
 }

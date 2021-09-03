@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:28:38 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/09/02 19:16:58 by cjulienn         ###   ########.fr       */
+/*   Updated: 2021/09/02 19:40:13 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,17 @@ void	initialize_struct(t_map_err *err)
 int	main(int argc, char **argv)
 {
 	t_map_err	*err;
-	t_parse		*parse;
 
 	if (argc != 2)
-		printf("Error\n Wrong number of arguments !\n");
+	{
+		printf("Error\nWrong number of arguments !\n");
+		return (-1);
+	}
 	err = (t_map_err *)malloc(sizeof(t_map_err));
 	if (!err)
 		return (-1);
-	parse = (t_parse *)malloc(sizeof(t_parse));
-	if (!parse)
-		return (-1);
 	initialize_struct(err);
-	check_validity_then_parse(argv, err);
-	free(err);
+	check_map_validity(argv, err);
 	// go this far if map is valid only
 	return (0);
 }
