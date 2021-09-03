@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:28:29 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/09/02 19:37:56 by cjulienn         ###   ########.fr       */
+/*   Updated: 2021/09/02 19:46:57 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct	s_map_err
 	int			len_line;
 	int			nb_rect_error;
 	int			nb_err_walls;
+	int			ber_format;
 }				t_map_err;
 
 // so long

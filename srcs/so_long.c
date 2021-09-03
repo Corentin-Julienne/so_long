@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:28:38 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/09/02 19:40:13 by cjulienn         ###   ########.fr       */
+/*   Updated: 2021/09/02 20:04:28 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	initialize_struct(t_map_err *err)
 	err->len_line = 0;
 	err->nb_rect_error = 0;
 	err->nb_err_walls = 0;
+	err->ber_format = 1;
 }
 
 int	main(int argc, char **argv)

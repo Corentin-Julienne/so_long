@@ -6,11 +6,31 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 17:55:45 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/09/02 19:31:07 by cjulienn         ###   ########.fr       */
+/*   Updated: 2021/09/02 20:03:58 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+void	is_format_ber(char **argv,t_map_err *err)
+{
+	char	*map;
+	
+	map = argv[1];
+	if (!map)
+		err->ber_format = 0;
+	if (map)
+	{
+		if (ft_strlen(map >= 5) )
+			err->ber_format = 1;
+	}
+	if (err->ber_format != 1)
+	{
+		printf("Error\nMap is not in ber format\n");
+		free(err);
+		exit(0);
+	}
+}
 
 void	check_errors(t_map_err *err)
 {
@@ -29,7 +49,8 @@ void	check_errors(t_map_err *err)
 	if (err)
 		map_error_messages(7);
 	if (err->nb_err_walls != 0 || err->nb_psp != 1 || err->nb_coll <= 0
-	|| err->nb_exit <= 0 || err->nb_rect_error != 0 || err->nb_inv_char != 0)
+		|| err->nb_exit <= 0 || err->nb_rect_error != 0
+		|| err->nb_inv_char != 0)
 	{
 		free(err);
 		exit(0);
