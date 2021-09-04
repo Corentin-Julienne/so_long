@@ -11,7 +11,7 @@ int mlx_string_put
 
 DESCRIPTION
 The mlx_pixel_put() function draws a defined pixel in the window
-win_ptr using the (x, y) coordinates, and the specified color\&. 
+win_ptr using the (x, y) coordinates, and the specified color. 
 The origin (0,0) is the upper left corner of the window, the x and y axis
 respectively pointing right and down. The connection identifier,
 mlx_ptr, is needed (see the mlx man page).
