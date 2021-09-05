@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:28:38 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/09/03 16:17:23 by cjulienn         ###   ########.fr       */
+/*   Updated: 2021/09/05 16:53:00 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,6 @@ int	main(int argc, char **argv)
 		return (-1);
 	initialize_struct(map);
 	check_map_validity(argv, map);
-	// go this far if map is valid only
+	init_game(map);
 	return (0);
 }

@@ -6,45 +6,52 @@
 #    By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/20 17:28:24 by cjulienn          #+#    #+#              #
-#    Updated: 2021/09/02 19:34:54 by cjulienn         ###   ########.fr        #
+#    Updated: 2021/09/05 14:25:32 by cjulienn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = so_long
+NAME= so_long
 
-SRCS = ./srcs/so_long.c \
-	   ./srcs/check_map_validity_1.c \
-	   ./srcs/check_map_validity_2.c
+SRCS= ./srcs/so_long.c \
+	  ./srcs/check_map_validity_1.c \
+	  ./srcs/check_map_validity_2.c \
+	  ./srcs/parse_map.c \
+	  ./srcs/player_moves.c
 
 OBJS = $(SRCS:.c=.o)
 
 INCLUDE_PATH = ./includes/
-LIBFT_LIB = libft.a
 
+LIBFT_LIB = libft.a
 LIBFT_PATH = ./libft/
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I$(INCLUDE_PATH)
+MINILIBX_PATH= ./mlx/
+MINILIBX_LIB= libmlx.dylib
 
-RM = rm -f
+CC= gcc
+CFLAGS= -Wall -Wextra -Werror -I$(INCLUDE_PATH) -I$(MINILIBX_PATH)
+
+RM= rm -f
 
 $(NAME): $(OBJS)
 	$(MAKE) -C $(LIBFT_PATH)
-	cp ./libft/libft.a .
-	$(CC) $(CFLAGS) $(OBJS) -L. -lft -o $(NAME)
-	@echo so_long successfully made !!!
+	$(MAKE) -C $(MINILIBX_PATH)
+	$(CC) $(CFLAGS) $(OBJS) -Llibft -lft -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	cp ./mlx/libmlx.dylib .
+	@echo $(NAME) successfully made !!!
 
 all: 
 	$(NAME)
 
 clean:
 	$(MAKE) -C $(LIBFT_PATH) clean
+	$(MAKE) -C $(MINILIBX_PATH) clean
 	$(RM) $(OBJS)
 	
 fclean:	clean
 	$(MAKE) -C $(LIBFT_PATH) fclean
 	$(RM) $(NAME)
-	$(RM) libft.a
+	$(RM) $(MINILIBX_LIB)
 
 re:	fclean all
 

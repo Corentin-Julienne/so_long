@@ -6,13 +6,13 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:28:33 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/09/03 16:50:50 by cjulienn         ###   ########.fr       */
+/*   Updated: 2021/09/05 16:33:06 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void	is_map_rectangular(const char *line, int nl_of_lines, t_map_parse *map)
+void	is_map_rectangular(const char *line, int nb_of_lines, t_map_parse *map)
 {
 	int	len;
 
@@ -20,14 +20,14 @@ void	is_map_rectangular(const char *line, int nl_of_lines, t_map_parse *map)
 		return ;
 	len = map->len_line;
 	map->len_line = (int)ft_strlen(line);
-	if (nl_of_lines != 0)
+	if (nb_of_lines != 0)
 	{
 		if (len != map->len_line)
 			map->nb_rect_error++;
 	}
 }
 
-void	is_walls(const char *line, int nl_of_lines, t_map_parse *map)
+void	is_walls(const char *line, int nb_of_lines, t_map_parse *map)
 {
 	int	i;
 	int	len;
@@ -35,14 +35,14 @@ void	is_walls(const char *line, int nl_of_lines, t_map_parse *map)
 	if (!line)
 		return ;
 	i = 0;
-	while (line[i] && nl_of_lines == 0)
+	while (line[i] && nb_of_lines == 0)
 	{
 		if (line[i] != '1')
 			map->nb_err_walls++;
 		i++;
 	}
 	len = ft_strlen(line);
-	if (nl_of_lines != 0)
+	if (nb_of_lines != 0)
 	{
 		if (line[0] != '1')
 			map->nb_err_walls++;
@@ -51,11 +51,21 @@ void	is_walls(const char *line, int nl_of_lines, t_map_parse *map)
 	}
 }
 
-void	is_last_wall(const char *line, int nl_of_lines, t_map_parse *map)
+void	is_last_wall(int nb_of_lines, t_map_parse *map)
 {
+	char	*line;
+	int		i;
+
+	line = map->map_arr[nb_of_lines];
 	if (!line)
-		return;
-	// TO IMPLEMENT
+		return ;
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != '1')
+			map->nb_err_walls++;
+		i++;
+	}
 }
 
 void	count_items(const char *line, t_map_parse *map)
@@ -83,7 +93,7 @@ void	count_items(const char *line, t_map_parse *map)
 void	check_map_validity(char **argv, t_map_parse *map)
 {
 	char	*next_line;
-	int		nl_of_lines;
+	int		nb_of_lines;
 	int		fd;
 
 	fd = open(argv[1], O_RDONLY);
@@ -91,16 +101,18 @@ void	check_map_validity(char **argv, t_map_parse *map)
 		printf("Error\nfd impossible to read\n");
 	is_format_ber(argv, map);
 	next_line = NULL;
-	nl_of_lines = -1;
-	while(next_line != NULL || nl_of_lines == -1)
+	nb_of_lines = -1;
+	while(next_line != NULL || nb_of_lines == -1)
 	{
-		nl_of_lines++;
+		nb_of_lines++;
 		next_line = get_next_line(fd);
 		count_items(next_line, map);
-		is_map_rectangular(next_line, nl_of_lines, map);
-		is_wall(next_line, nl_of_lines, map);
+		is_map_rectangular(next_line, nb_of_lines, map);
+		is_wall(next_line, nb_of_lines, map);
 		parser_map(next_line, map);
 	}
-	is_last_wall(nl_of_lines, nl_of_lines, map); // TODO
+	map->map_arr = ft_split(map->lines, '\n');
+	free(map->lines);
+	is_last_wall(nb_of_lines, map);
 	check_errors(map);
 }

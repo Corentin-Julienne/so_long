@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 17:55:45 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/09/03 16:24:42 by cjulienn         ###   ########.fr       */
+/*   Updated: 2021/09/05 16:09:26 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	check_errors(t_map_parse *map)
 		free(map);
 		exit(0);
 	}
-	free(map);
 }
 
 void	map_error_messages(int error_type)
