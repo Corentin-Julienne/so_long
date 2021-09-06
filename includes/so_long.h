@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:28:29 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/09/05 17:02:29 by cjulienn         ###   ########.fr       */
+/*   Updated: 2021/09/05 18:59:14 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@
 # include <stdio.h>
 # include <string.h>
 # include <fcntl.h>
+
+typedef struct	s_image
+{
+	void		*id;
+	int			width;
+	int			height;
+}				t_image;
 
 typedef struct	s_map_parse
 {
@@ -39,18 +46,18 @@ typedef struct	s_game
 {
 	void		*mlx;
 	void		*wdw;
-	void		*img_wall;
-	void		*img_space;
-	void		*img_coll;
-	void		*img_exit;
-	void		*img_psp;
+	t_image		*img_wall;
+	t_image		*img_space;
+	t_image		*img_coll;
+	t_image		*img_exit;
+	t_image		*img_psp;
 }				t_game;
 
-// so long
+/* so long */
 
 void	initialize_struct(t_map_parse *map);
 
-// check_map_validity 1 and 2
+/* check map_validity 1 and 2 */
 
 void	is_map_rectangular(const char *line, int nb_of_lines, t_map_parse *map);
 void	is_walls(const char *line, int nb_of_lines, t_map_parse *map);
@@ -62,9 +69,15 @@ void	check_errors(t_map_parse *map);
 void	map_error_messages(int error_type);
 void	is_format_ber(char **argv, t_map_parse *map);
 
-// player_moves
+/* init game */
 
-  // TO IMPLEMENT
+void	load_textures(t_game *game);
+void	display_map(t_game *game, int wdw_x, int wdw_y);
+void	init_window(t_game *game, t_map_parse *map);
+void	init_game(t_map_parse *map);
 
+/* parse map */
+
+void	parser_map(const char *line, int nb_of_lines, t_map_parse *map);
 
 #endif

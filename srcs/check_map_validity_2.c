@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 17:55:45 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/09/05 16:09:26 by cjulienn         ###   ########.fr       */
+/*   Updated: 2021/09/05 19:17:10 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	is_format_ber(char **argv, t_map_parse *map)
 		length = ft_strlen(title);
 		if (length < 5)
 			map->ber_format = 0;
-		if (ft_strcmp(map + (length - 4)) != 0)
+		else if (ft_strncmp(title + (length - 4), ".ber", 4) != 0)
 			map->ber_format = 0;
 	}
 	if (map->ber_format != 1)

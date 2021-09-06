@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:28:33 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/09/05 16:33:06 by cjulienn         ###   ########.fr       */
+/*   Updated: 2021/09/05 18:58:53 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,8 @@ void	check_map_validity(char **argv, t_map_parse *map)
 		next_line = get_next_line(fd);
 		count_items(next_line, map);
 		is_map_rectangular(next_line, nb_of_lines, map);
-		is_wall(next_line, nb_of_lines, map);
-		parser_map(next_line, map);
+		is_walls(next_line, nb_of_lines, map);
+		parser_map(next_line, nb_of_lines, map);
 	}
 	map->map_arr = ft_split(map->lines, '\n');
 	free(map->lines);
