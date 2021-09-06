@@ -6,7 +6,7 @@
 #    By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/20 17:28:24 by cjulienn          #+#    #+#              #
-#    Updated: 2021/09/05 18:57:10 by cjulienn         ###   ########.fr        #
+#    Updated: 2021/09/06 14:19:11 by cjulienn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ NAME= so_long
 SRCS= ./srcs/so_long.c \
 	  ./srcs/check_map_validity_1.c \
 	  ./srcs/check_map_validity_2.c \
-	  ./srcs/parse_map.c \
-	  ./srcs/init_game.c
+	  ./srcs/init_game.c \
+	  ./srcs/utils.c
 
 OBJS = $(SRCS:.c=.o)
 

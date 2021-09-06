@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:29:34 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/08/23 19:46:25 by cjulienn         ###   ########.fr       */
+/*   Updated: 2021/09/06 12:31:46 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strjoin_and_free(const char *s1, const char *s2)
 	size_t			i;
 	size_t			j;
 
-	if (!s1)
+	if (!s1 || !s2)
 		return (NULL);
 	copy = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * (sizeof(char)));
 	if (!(copy))

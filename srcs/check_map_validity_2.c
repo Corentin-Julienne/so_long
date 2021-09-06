@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 17:55:45 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/09/05 19:17:10 by cjulienn         ###   ########.fr       */
+/*   Updated: 2021/09/06 13:07:32 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,8 @@ void	is_format_ber(char **argv, t_map_parse *map)
 	}
 	if (map->ber_format != 1)
 	{
-		printf("Error\nMap is not in ber format\n");
 		free(map);
-		exit(0);
+		display_error_message("Map is not in ber format\n");
 	}
 }
 

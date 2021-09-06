@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:28:38 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/09/05 16:53:00 by cjulienn         ###   ########.fr       */
+/*   Updated: 2021/09/06 14:18:45 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,13 @@ int	main(int argc, char **argv)
 	t_map_parse	*map;
 
 	if (argc != 2)
-	{
-		printf("Error\nWrong number of arguments !\n");
-		return (-1);
-	}
+		display_error_message("Wrong number of arguments !\n");
 	map = (t_map_parse *)malloc(sizeof(t_map_parse));
 	if (!map)
-		return (-1);
+		display_error_message("struct failed to be created\n");
 	initialize_struct(map);
 	check_map_validity(argv, map);
-	init_game(map);
+	printf("Seems to be working :)\n");
+	// init_game(map);
 	return (0);
 }

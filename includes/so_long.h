@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:28:29 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/09/05 18:59:14 by cjulienn         ###   ########.fr       */
+/*   Updated: 2021/09/06 13:52:44 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,9 @@ void	initialize_struct(t_map_parse *map);
 
 /* check map_validity 1 and 2 */
 
-void	is_map_rectangular(const char *line, int nb_of_lines, t_map_parse *map);
-void	is_walls(const char *line, int nb_of_lines, t_map_parse *map);
-void	is_last_wall(int nb_of_lines, t_map_parse *map);
-void	count_items(const char *line, t_map_parse *map);
+void	is_map_rectangular(t_map_parse *map);
+void	is_walls(t_map_parse *map);
+void	count_items(t_map_parse *map);
 void	check_map_validity(char **argv, t_map_parse *map);
 
 void	check_errors(t_map_parse *map);
@@ -79,5 +78,10 @@ void	init_game(t_map_parse *map);
 /* parse map */
 
 void	parser_map(const char *line, int nb_of_lines, t_map_parse *map);
+
+/* utils */
+
+char	*get_all_lines(int fd);
+void	display_error_message(char	*error_message);
 
 #endif
