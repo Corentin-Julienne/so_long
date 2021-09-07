@@ -1,6 +1,6 @@
 /* XPM */
 static char * example[] = {
-"40 39 99 2",
+"40 40 99 2",
 "  	c None",
 ". 	c #B8B8B8",
 "+ 	c #F2F2F2",
@@ -132,6 +132,7 @@ static char * example[] = {
 "$ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ ",
 "f l l l l l l l V 8 W X l l l l l l l l l l l l l l l l ) $ A Q l l l l l l l l ",
 "] X X X X X X q ] 0 Y Z X X X X X X X X X X X X X X X l q $ n ` X X X X X X X X ",
+"r { { { { { { > ] s 5 t { { { { { { { { { { { { { { { u q $ v w { { { { { { { { ",
 "r { { { { { { > ] s 5 t { { { { { { { { { { { { { { { u q $ v w { { { { { { { { ",
 "r { { { { { { > ] s 5 t { { { { { { { { { { { { { { { u q $ v w { { { { { { { { ",
 "r { { { { { { > ] s 5 t { { { { { { { { { { { { { { { u q $ v w { { { { { { { { ",

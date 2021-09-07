@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:28:29 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/09/07 12:02:07 by cjulienn         ###   ########.fr       */
+/*   Updated: 2021/09/07 16:07:56 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ typedef struct	s_game
 {
 	void		*mlx;
 	void		*wdw;
-	t_img		*img_wall;
 	t_img		*img_space;
+	t_img		*img_wall;
 	t_img		*img_coll;
 	t_img		*img_exit;
 	t_img		*img_psp;
@@ -55,7 +55,8 @@ typedef struct	s_game
 
 /* so long */
 
-void	initialize_struct(t_map_parse *map);
+void	init_map_struct(t_map_parse *map);
+void	init_game_struct(t_game *game);
 
 /* check map_validity 1 and 2 */
 
