@@ -6,24 +6,35 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 15:03:25 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/09/05 18:51:25 by cjulienn         ###   ########.fr       */
+/*   Updated: 2021/09/07 12:00:00 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../includes/so_long.h"
 
-void	load_textures(t_game *game)
+
+void	load_textures(t_game *game, t_img **image, char *path)
+{
+	int		width;
+	int		height;
+
+	(*image)->id = mlx_xpm_file_to_image(game->mlx, path, &width, &height);
+	printf("go to there\n");
+	(*image)->width = width;
+	printf("go to there\n");
+	(*image)->height = height; 
+}
+
+void	init_textures(t_game *game) // does not work (seg fault sa race)
 {	
-	game->img_space->id = mlx_xpm_file_to_image(game->mlx,
- "../imgs/sand.xpm", &game->img_space->width, &game->img_space->height);
-	game->img_wall->id = mlx_xpm_file_to_image(game->mlx, 
-"../imgs/wall.xpm", &game->img_wall->width, &game->img_wall->height);
-	game->img_psp->id = mlx_xpm_file_to_image(game->mlx, 
-"../imgs/player.xpm", &game->img_psp->width, &game->img_psp->height);
-	game->img_coll->id = mlx_xpm_file_to_image(game->mlx, 
-"../imgs/gas.xpm", &game->img_coll->width, &game->img_coll->height);
-	game->img_exit->id = mlx_xpm_file_to_image(game->mlx, 
-"../imgs/helicopter.xpm", &game->img_exit->width, &game->img_exit->height);
+	printf("bite\n");
+	load_textures(game, &game->img_space, "../imgs/sand.xpm");
+	printf("double bite\n");
+	load_textures(game, &game->img_wall, "../imgs/wall.xpm");
+	load_textures(game, &game->img_psp, "../imgs/player.xpm");
+	load_textures(game, &game->img_coll, "../imgs/gas.xpm");
+	load_textures(game, &game->img_exit, "../imgs/helicopter.xpm");
+	
 }
 
 void	display_map(t_game *game, int wdw_x, int wdw_y)
@@ -66,15 +77,15 @@ void	init_game(t_map_parse *map)
 {
 	t_game	*game;
 
-	game = (t_game * )malloc(sizeof(t_game));
+	game = (t_game *)malloc(sizeof(t_game));
 	if (!game)
 	{
-		printf("Error\nMalloc error during the allocation of t_game struct\n");
 		free(map);
-		exit(0);
+		display_error_message("Malloc error during the allocation of t_game struct\n");
 	}
+	game->img_space = 0;
 	game->mlx = mlx_init();
-	load_textures(game);
+	init_textures(game);
 	init_window(game, map);
 	// add link to gameplay func here before loop
 	mlx_loop(game->mlx); // should be the last function of the prog

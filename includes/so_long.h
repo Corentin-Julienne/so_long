@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:28:29 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/09/06 13:52:44 by cjulienn         ###   ########.fr       */
+/*   Updated: 2021/09/07 12:02:07 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@
 # include <string.h>
 # include <fcntl.h>
 
-typedef struct	s_image
+typedef struct	s_img
 {
 	void		*id;
 	int			width;
 	int			height;
-}				t_image;
+}				t_img;
 
 typedef struct	s_map_parse
 {
@@ -46,11 +46,11 @@ typedef struct	s_game
 {
 	void		*mlx;
 	void		*wdw;
-	t_image		*img_wall;
-	t_image		*img_space;
-	t_image		*img_coll;
-	t_image		*img_exit;
-	t_image		*img_psp;
+	t_img		*img_wall;
+	t_img		*img_space;
+	t_img		*img_coll;
+	t_img		*img_exit;
+	t_img		*img_psp;
 }				t_game;
 
 /* so long */
@@ -70,7 +70,8 @@ void	is_format_ber(char **argv, t_map_parse *map);
 
 /* init game */
 
-void	load_textures(t_game *game);
+void	init_textures(t_game *game);
+void	load_textures(t_game *game, t_img **image, char *path);
 void	display_map(t_game *game, int wdw_x, int wdw_y);
 void	init_window(t_game *game, t_map_parse *map);
 void	init_game(t_map_parse *map);
