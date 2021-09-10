@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:28:29 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/09/10 17:19:36 by cjulienn         ###   ########.fr       */
+/*   Updated: 2021/09/10 17:23:42 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 
 # include "../libft/libft.h"
 # include <mlx.h>
-# include <stdlib.h> // check after and remove any unnecessary headers
+# include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
-# include <string.h>
 # include <fcntl.h>
 
 typedef struct s_img
