@@ -6,15 +6,15 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 12:07:29 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/09/06 12:59:57 by cjulienn         ###   ########.fr       */
+/*   Updated: 2021/09/09 17:54:18 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
 /* get_all_lines takes a fd as input and convert it to a single char 
-(malloqued) by using the read function
-, or NULL if it fails a malloc or cannnot read */
+(malloqued) by using the read function, 
+or NULL if it fails a malloc or cannnot read */
 
 char	*get_all_lines(int fd)
 {
@@ -57,4 +57,26 @@ void	display_error_message(char	*error_message)
 	printf("%s", message);
 	free(message);
 	exit (0);
+}
+
+/* free image previously malloqued in case of malloc error 
+or when about to exit the program */
+
+void	free_images(t_game *game, int num_img)
+{
+	free(game->img_space);
+	free(game->img_wall);
+	if (num_img == 3)
+		free(game->img_psp);
+	if (num_img == 4)
+	{
+		free(game->img_psp);
+		free(game->img_coll);
+	}
+	if (num_img == 5)
+	{
+		free(game->img_psp);
+		free(game->img_coll);
+		free(game->img_exit);
+	}
 }

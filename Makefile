@@ -6,7 +6,7 @@
 #    By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/20 17:28:24 by cjulienn          #+#    #+#              #
-#    Updated: 2021/09/06 14:19:11 by cjulienn         ###   ########.fr        #
+#    Updated: 2021/09/09 17:50:51 by cjulienn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,11 @@ SRCS= ./srcs/so_long.c \
 	  ./srcs/check_map_validity_1.c \
 	  ./srcs/check_map_validity_2.c \
 	  ./srcs/init_game.c \
-	  ./srcs/utils.c
+	  ./srcs/utils.c \
+	  ./srcs/display_map.c \
+	  ./srcs/player_inputs.c \
+	  ./srcs/player_moves.c \
+	  ./srcs/init_structs.c
 
 OBJS = $(SRCS:.c=.o)
 

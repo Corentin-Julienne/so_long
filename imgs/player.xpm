@@ -2,7 +2,7 @@
 static char * example[] = {
 "40 40 565 2",
 "  	c None",
-". 	c #FFFFFF",
+". 	c None",
 "+ 	c #EFEFEF",
 "@ 	c #EBEBEB",
 "# 	c #F7F7F7",
