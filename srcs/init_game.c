@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 15:03:25 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/09/09 17:48:59 by cjulienn         ###   ########.fr       */
+/*   Updated: 2021/09/10 14:11:55 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	init_textures(t_game *game)
 	load_textures(game, &game->img_exit, "./imgs/helicopter.xpm");
 }
 
-void	init_window(t_game *game, t_map_parse *map)
+void	init_window(t_game *game)
 {
 	int		x;
 	int		y;
@@ -42,14 +42,16 @@ void	init_window(t_game *game, t_map_parse *map)
 	i = 0;
 	x = 0;
 	y = 0;
-	while (map->map_arr[i])
+	while (game->map[i])
 	{
 		y += game->img_space->height;
 		i++;
 	}
-	x += ft_strlen(map->map_arr[0]) * game->img_space->width;
+	x += ft_strlen(game->map[0]) * game->img_space->width;
+	game->wdw_x = x;
+	game->wdw_y = y;
 	game->wdw = mlx_new_window(game->mlx, x, y, "so_long");
-	display_map(game, map, x, y);
+	display_map(game, x, y);
 }
 
 void	init_game(t_map_parse *map)
@@ -64,10 +66,10 @@ void	init_game(t_map_parse *map)
 		display_error_message("Malloc error (allocation of t_game_struct)\n");
 	}
 	init_game_struct(game, map);
+	free(map);
 	game->mlx = mlx_init();
 	init_textures(game);
-	init_window(game, map);
-	free(map);
+	init_window(game); // couille
 	coord = (t_pl_coord *)malloc(sizeof(t_pl_coord));
 	if (!coord)
 	{
@@ -76,7 +78,7 @@ void	init_game(t_map_parse *map)
 		display_error_message("Malloc error (allocation of t_player_coord)\n");
 	}
 	init_coord_struct(game, coord);
+	// ok till this point
 	mlx_key_hook(game->wdw, key_hook, &game);
-	mlx_mouse_hook(game->wdw, mouse_hook, &game);
 	mlx_loop(game->mlx);
 }

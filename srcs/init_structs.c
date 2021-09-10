@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 17:50:22 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/09/09 18:33:08 by cjulienn         ###   ########.fr       */
+/*   Updated: 2021/09/10 16:44:27 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,25 +44,24 @@ void	init_game_struct(t_game *game, t_map_parse *map)
 		display_error_message("malloc failed in game struct\n");
 	game->total_moves = 0;
 	game->map = map->map_arr;
+	game->nb_coll = map->nb_coll;
 }
 
 void	init_coord_struct(t_game *game, t_pl_coord *coord)
 {
 	int	i;
 	int	j;
-	
+
 	i = 0;
 	j = 0;
 	while(game->map[j])
 	{
 		while (game->map[j][i])
 		{
-			if (game->map[i][j] == 'P')
+			if (game->map[j][i] == 'P')
 			{
 				coord->i = i;
 				coord->j = j;
-				coord->x = i * game->img_space->width;
-				coord->y = j * game->img_space->height;
 			}
 			i++;
 		}

@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:28:29 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/09/09 18:58:56 by cjulienn         ###   ########.fr       */
+/*   Updated: 2021/09/10 17:19:36 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,8 @@ typedef struct s_img
 
 typedef struct s_pl_coord
 {
-	int				i;
 	int				j;
-	int				x;
-	int				y;
+	int				i;
 }					t_pl_coord;
 
 typedef struct s_map_parse
@@ -54,6 +52,8 @@ typedef struct s_game
 {
 	void			*mlx;
 	void			*wdw;
+	int				wdw_x;
+	int				wdw_y;
 	t_img			*img_space;
 	t_img			*img_wall;
 	t_img			*img_coll;
@@ -61,6 +61,7 @@ typedef struct s_game
 	t_img			*img_psp;
 	char			**map;
 	int				total_moves;
+	int				nb_coll;
 	t_pl_coord		*coord;
 }					t_game;
 
@@ -79,7 +80,7 @@ void	is_format_ber(char **argv, t_map_parse *map);
 
 void	init_textures(t_game *game);
 void	load_textures(t_game *game, t_img **image, char *path);
-void	init_window(t_game *game, t_map_parse *map);
+void	init_window(t_game *game);
 void	init_game(t_map_parse *map);
 
 /* init_structs */
@@ -90,20 +91,23 @@ void	init_coord_struct(t_game *game, t_pl_coord *coord);
 
 /* display map */
 
-void	fulfill_wdw(t_game *game, t_map_parse *map, int x, int y);
-void	display_map(t_game *game, t_map_parse *map, int wdw_x, int wdw_y);
+void	fulfill_wdw(t_game *game, int x, int y);
+void	display_map(t_game *game, int wdw_x, int wdw_y);
 void	floor_wdw(t_game *game, int wdw_x, int wdw_y);
 
 /* player inputs */
 
 int		key_hook(int keycode, t_game **game);
-int		mouse_hook(int button, int x, int y);
 void	quit_game(t_game *game);
 
 /* player moves */
 
 void	move_player(t_game *game, int keycode);
 int		is_obstacle(t_game *game, int keycode);
+void	update_coord(t_game *game, int keycode);
+void	change_player_pos(t_game *game, int keycode);
+void	handle_coll(t_game *game);
+void	handle_exit_pos(t_game *game);
 
 /* utils */
 
