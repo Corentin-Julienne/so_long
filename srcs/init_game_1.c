@@ -1,37 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_game.c                                        :+:      :+:    :+:   */
+/*   init_game_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 15:03:25 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/09/10 14:11:55 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/03/02 12:44:11 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void	load_textures(t_game *game, t_img **image, char *path)
-{
-	int		width;
-	int		height;
-
-	(*image)->id = mlx_xpm_file_to_image(game->mlx, path, &width, &height);
-	if (!((*image)->id))
-		display_error_message("img failed to import from xpm file\n");
-	(*image)->width = width;
-	(*image)->height = height;
-}
-
-void	init_textures(t_game *game)
-{	
-	load_textures(game, &game->img_space, "./imgs/sand.xpm");
-	load_textures(game, &game->img_wall, "./imgs/wall.xpm");
-	load_textures(game, &game->img_psp, "./imgs/player.xpm");
-	load_textures(game, &game->img_coll, "./imgs/gas.xpm");
-	load_textures(game, &game->img_exit, "./imgs/helicopter.xpm");
-}
+/* init_window calculate the width and heigth of the map 
+base on the map and the x and y of the imgs */
 
 void	init_window(t_game *game)
 {
@@ -51,25 +33,23 @@ void	init_window(t_game *game)
 	game->wdw_x = x;
 	game->wdw_y = y;
 	game->wdw = mlx_new_window(game->mlx, x, y, "so_long");
+	ft_undercoat(game); // ?
 	display_map(game, x, y);
 }
 
-void	init_game(t_map_parse *map)
+void	ft_undercoat(t_game *game)
 {
-	t_game			*game;
-	t_pl_coord		*coord;
+	void	*undercoat;
 
-	game = (t_game *)malloc(sizeof(t_game));
-	if (!game)
-	{
-		free(map);
-		display_error_message("Malloc error (allocation of t_game_struct)\n");
-	}
-	init_game_struct(game, map);
-	free(map);
-	game->mlx = mlx_init();
-	init_textures(game);
-	init_window(game); // couille
+	undercoat = mlx_new_image(game->mlx, game->wdw_x, game->wdw_x);
+	mlx_put_image_to_window(game->mlx, game->wdw, undercoat, 0, 0);
+}
+
+void	populate_game(t_game *game)
+{
+	t_pl_coord		*coord;
+	
+	init_window(game); // couille	
 	coord = (t_pl_coord *)malloc(sizeof(t_pl_coord));
 	if (!coord)
 	{
@@ -78,7 +58,29 @@ void	init_game(t_map_parse *map)
 		display_error_message("Malloc error (allocation of t_player_coord)\n");
 	}
 	init_coord_struct(game, coord);
-	// ok till this point
 	mlx_key_hook(game->wdw, key_hook, &game);
 	mlx_loop(game->mlx);
+}
+
+void	init_game(t_map_parse *map)
+{
+	t_game			*game;
+	int				feedback;
+
+	game = (t_game *)malloc(sizeof(t_game));
+	if (!game)
+	{
+		free(map->map_arr);
+		free(map);
+		display_error_message("Malloc error (allocation of t_game_struct)\n");
+		exit(1);
+	}
+	feedback = init_game_struct(game, map);
+	free(map->map_arr);
+	free(map);
+	if (feedback != 0)
+		exit(1);
+	game->mlx = mlx_init();
+	init_textures(game);
+	populate_game(game);
 }

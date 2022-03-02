@@ -6,13 +6,13 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 16:43:11 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/09/10 13:53:42 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/03/02 12:57:10 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void	floor_wdw(t_game *game, int wdw_x, int wdw_y)
+void	floor_wdw(t_game *game, int wdw_x, int wdw_y) // problem there
 {
 	int		x;
 	int		y;
@@ -61,6 +61,7 @@ void	display_map(t_game *game, int wdw_x, int wdw_y)
 	x = 0;
 	y = 0;
 	floor_wdw(game, wdw_x, wdw_y);
+	return ; // testing purpose only, kill after
 	while (y < wdw_y)
 	{
 		while (x < wdw_x)

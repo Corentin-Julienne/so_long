@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 17:50:22 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/09/10 16:44:27 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/03/02 12:33:08 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	init_map_struct(t_map_parse *map)
 	map->ber_format = 1;
 }
 
-void	init_game_struct(t_game *game, t_map_parse *map)
+int	init_game_struct(t_game *game, t_map_parse *map)
 {	
 	game->img_space = (t_img *)malloc(sizeof(t_img));
 	game->img_wall = (t_img *)malloc(sizeof(t_img));
@@ -41,10 +41,14 @@ void	init_game_struct(t_game *game, t_map_parse *map)
 		free_images(game, 4);
 	if (!game->img_space || !game->img_wall || !game->img_psp
 		|| !game->img_coll || !game->img_exit)
-		display_error_message("malloc failed in game struct\n");
+	{
+		display_error_message("Malloc failed in game struct\n");
+		return (1);
+	}
 	game->total_moves = 0;
 	game->map = map->map_arr;
 	game->nb_coll = map->nb_coll;
+	return (0);
 }
 
 void	init_coord_struct(t_game *game, t_pl_coord *coord)

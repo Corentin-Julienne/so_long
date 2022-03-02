@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 12:07:29 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/09/09 17:54:18 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/03/02 11:33:53 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,8 @@ void	display_error_message(char	*error_message)
 
 	prefix = "Error\n";
 	message = ft_strjoin(prefix, error_message);
-	printf("%s", message);
+	ft_printf("%s", message);
 	free(message);
-	exit (0);
 }
 
 /* free image previously malloqued in case of malloc error 

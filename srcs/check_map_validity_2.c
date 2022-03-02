@@ -6,13 +6,41 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 17:55:45 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/09/06 13:07:32 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/03/02 12:01:09 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void	is_format_ber(char **argv, t_map_parse *map)
+void	count_items(t_map_parse *map)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	while (map->map_arr[j])
+	{
+		while (map->map_arr[j][i])
+		{
+			if (map->map_arr[j][i] == 'E')
+				map->nb_exit++;
+			if (map->map_arr[j][i] == 'P')
+				map->nb_psp++;
+			if (map->map_arr[j][i] == 'C')
+				map->nb_coll++;
+			if (map->map_arr[j][i] != '1' && map->map_arr[j][i] != '0'
+			&& map->map_arr[j][i] != 'P'
+			&& map->map_arr[j][i] != 'E' && map->map_arr[j][i] != 'C')
+				map->nb_inv_char++;
+			i++;
+		}
+		i = 0;
+		j++;
+	}
+}
+
+void	is_format_ber(char **argv, t_map_parse *map, int fd)
 {
 	char	*title;
 	int		length;
@@ -32,6 +60,10 @@ void	is_format_ber(char **argv, t_map_parse *map)
 	{
 		free(map);
 		display_error_message("Map is not in ber format\n");
+		close(fd);
+		if (fd == -1)
+			display_error_message("Fd could not be closed\n");
+		exit(1);
 	}
 }
 
@@ -55,23 +87,24 @@ void	check_errors(t_map_parse *map)
 		|| map->nb_exit <= 0 || map->nb_rect_error != 0
 		|| map->nb_inv_char != 0)
 	{
+		free(map->map_arr);
 		free(map);
-		exit(0);
+		exit(1);
 	}
 }
 
 void	map_error_messages(int error_type)
 {
 	if (error_type == 1)
-		printf("Error\nMap not surrounded by walls\n");
+		ft_printf("Error\nMap not surrounded by walls\n");
 	if (error_type == 2)
-		printf("Error\nPlayer starting position unexistant or plural\n");
+		ft_printf("Error\nPlayer starting position unexistant or plural\n");
 	if (error_type == 3)
-		printf("Error\nNo collectible present\n");
+		ft_printf("Error\nNo collectible present\n");
 	if (error_type == 4)
-		printf("Error\nNo exit present\n");
+		ft_printf("Error\nNo exit present\n");
 	if (error_type == 5)
-		printf("Error\nNon rectangular map\n");
+		ft_printf("Error\nNon rectangular map\n");
 	if (error_type == 6)
-		printf("Error\ninvalid character used in map\n");
+		ft_printf("Error\ninvalid character used in map\n");
 }

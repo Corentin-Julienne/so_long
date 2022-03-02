@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:28:29 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/09/10 17:23:42 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/03/02 12:59:30 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,26 +66,26 @@ typedef struct s_game
 
 /* check map_validity 1 and 2 */
 
-void	is_map_rectangular(t_map_parse *map);
-void	is_walls(t_map_parse *map);
 void	count_items(t_map_parse *map);
-void	check_map_validity(char **argv, t_map_parse *map);
-
 void	check_errors(t_map_parse *map);
 void	map_error_messages(int error_type);
-void	is_format_ber(char **argv, t_map_parse *map);
+void	is_format_ber(char **argv, t_map_parse *map, int fd);
+int		check_map_validity(char **argv, t_map_parse *map);
+int		check_map_validity_2(t_map_parse *map);
 
-/* init game */
+/* init game 1 and 2 */
 
 void	init_textures(t_game *game);
-void	load_textures(t_game *game, t_img **image, char *path);
+void	load_textures(t_game *game, t_img **image, char *path, int iter);
 void	init_window(t_game *game);
+void	populate_game(t_game *game);
 void	init_game(t_map_parse *map);
+void	ft_undercoat(t_game *game);
 
 /* init_structs */
 
 void	init_map_struct(t_map_parse *map);
-void	init_game_struct(t_game *game, t_map_parse *map);
+int		init_game_struct(t_game *game, t_map_parse *map);
 void	init_coord_struct(t_game *game, t_pl_coord *coord);
 
 /* display map */
