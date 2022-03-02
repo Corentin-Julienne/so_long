@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 15:03:25 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/03/02 12:44:11 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/03/02 16:25:13 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,16 @@ void	init_window(t_game *game)
 		y += game->img_space->height;
 		i++;
 	}
-	x += ft_strlen(game->map[0]) * game->img_space->width;
-	game->wdw_x = x;
 	game->wdw_y = y;
+	i = 0;
+	while (game->map[0][i])
+	{
+		x += game->img_space->width;
+		i++;
+	}
+	game->wdw_x = x;
 	game->wdw = mlx_new_window(game->mlx, x, y, "so_long");
-	ft_undercoat(game); // ?
+	ft_undercoat(game);
 	display_map(game, x, y);
 }
 
@@ -76,7 +81,6 @@ void	init_game(t_map_parse *map)
 		exit(1);
 	}
 	feedback = init_game_struct(game, map);
-	free(map->map_arr);
 	free(map);
 	if (feedback != 0)
 		exit(1);
