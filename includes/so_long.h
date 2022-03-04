@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:28:29 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/03/02 12:59:30 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/03/04 16:00:27 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	check_errors(t_map_parse *map);
 void	map_error_messages(int error_type);
 void	is_format_ber(char **argv, t_map_parse *map, int fd);
 int		check_map_validity(char **argv, t_map_parse *map);
-int		check_map_validity_2(t_map_parse *map);
+int		check_map_validity_2(t_map_parse *map, int fd);
 
 /* init game 1 and 2 */
 
@@ -98,12 +98,15 @@ void	floor_wdw(t_game *game, int wdw_x, int wdw_y);
 
 int		key_hook(int keycode, t_game **game);
 void	quit_game(t_game *game);
+int		exit_hook(t_game **game);
+int		expose_hook(void);
 
-/* player moves */
+/* player moves 1 and 2 */
 
 void	move_player(t_game *game, int keycode);
 int		is_obstacle(t_game *game, int keycode);
 void	update_coord(t_game *game, int keycode);
+void	change_player_pos_2(t_game *game);
 void	change_player_pos(t_game *game, int keycode);
 void	handle_coll(t_game *game);
 void	handle_exit_pos(t_game *game);

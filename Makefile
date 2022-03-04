@@ -6,7 +6,7 @@
 #    By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/20 17:28:24 by cjulienn          #+#    #+#              #
-#    Updated: 2022/03/02 17:17:54 by cjulienn         ###   ########.fr        #
+#    Updated: 2022/03/04 13:18:29 by cjulienn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ SRCS= ./srcs/so_long.c \
 	  ./srcs/utils.c \
 	  ./srcs/display_map.c \
 	  ./srcs/player_inputs.c \
-	  ./srcs/player_moves.c \
+	  ./srcs/player_moves_1.c \
+	  ./srcs/player_moves_2.c \
 	  ./srcs/init_structs.c
 
 OBJS = $(SRCS:.c=.o)

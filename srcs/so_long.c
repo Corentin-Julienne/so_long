@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:28:38 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/03/02 14:53:37 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/03/04 12:37:04 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ int	main(int argc, char **argv)
 	t_map_parse	*map;
 
 	if (argc != 2)
+	{
 		display_error_message("Wrong number of arguments !\n");
+		exit(1);
+	}
 	map = (t_map_parse *)malloc(sizeof(t_map_parse));
 	if (!map)
 	{

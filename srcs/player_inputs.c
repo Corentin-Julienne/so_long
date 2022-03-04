@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 20:09:18 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/09/10 16:46:37 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/03/04 16:00:16 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,17 @@ int	key_hook(int keycode, t_game **game)
 		quit_game(*game);
 	if (keycode == 13 || keycode == 1 || keycode == 2 || keycode == 0)
 		move_player(*game, keycode);
+	return (1);
+}
+
+int	exit_hook(t_game **game)
+{
+	quit_game(*game);
+	return (1);
+}
+
+int	expose_hook(void)
+{
+	printf("it works baby !\n");
 	return (1);
 }

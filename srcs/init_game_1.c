@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 15:03:25 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/03/02 16:25:13 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/03/04 16:02:30 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	populate_game(t_game *game)
 {
 	t_pl_coord		*coord;
 	
-	init_window(game); // couille	
+	init_window(game);
 	coord = (t_pl_coord *)malloc(sizeof(t_pl_coord));
 	if (!coord)
 	{
@@ -63,6 +63,8 @@ void	populate_game(t_game *game)
 		display_error_message("Malloc error (allocation of t_player_coord)\n");
 	}
 	init_coord_struct(game, coord);
+	mlx_hook(game->wdw, 17, 0, exit_hook, &game);
+	mlx_hook(game->wdw, 1L<<18, 0, expose_hook, (void *)0);
 	mlx_key_hook(game->wdw, key_hook, &game);
 	mlx_loop(game->mlx);
 }
@@ -77,7 +79,7 @@ void	init_game(t_map_parse *map)
 	{
 		free(map->map_arr);
 		free(map);
-		display_error_message("Malloc error (allocation of t_game_struct)\n");
+		display_error_message("Malloc error (alloc of t_game_struct)\n");
 		exit(1);
 	}
 	feedback = init_game_struct(game, map);

@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:28:33 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/03/02 12:59:53 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/03/04 12:46:50 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,14 @@ static void	is_walls(t_map_parse *map)
 	is_intermediate_walls(map);
 }
 
-int	check_map_validity_2(t_map_parse *map)
+int	check_map_validity_2(t_map_parse *map, int fd)
 {
+	if (close(fd) == -1)
+	{
+		free(map);
+		display_error_message("Fd could not be closed\n");
+		exit(1);
+	}
 	map->map_arr = ft_split(map->lines, '\n');
 	if (!map->map_arr)
 	{
@@ -100,7 +106,8 @@ int	check_map_validity(char **argv, t_map_parse *map)
 	if (fd == -1)
 	{
 		display_error_message("Fd impossible to read\n");
-		return (1);
+		free(map);
+		exit(1);
 	}
 	is_format_ber(argv, map, fd);
 	map->lines = get_all_lines(fd);
@@ -111,12 +118,6 @@ int	check_map_validity(char **argv, t_map_parse *map)
 		if (close(fd) == -1)
 			display_error_message("Fd could not be closed\n");
 		exit(1);
-	}		
-	if (close(fd) == -1)
-	{
-		free(map);
-		display_error_message("Fd could not be closed\n");
-		exit(1);
 	}
-	return (check_map_validity_2(map));
+	return (check_map_validity_2(map, fd));
 }
