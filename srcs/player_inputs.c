@@ -6,23 +6,21 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 20:09:18 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/03/04 16:00:16 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/03/05 15:07:01 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void	quit_game(t_game *game)
+void	quit_game(t_game *game) // change this
 {
 	free_images(game, 5);
 	mlx_clear_window(game->mlx, game->wdw);
+	free(game->map);
 	free(game->coord);
 	free(game);
 	exit(0);
 }
-
-/* handle when player press ESC (CODE 53) or use 
-WASD (respectively 13, 0, 1, 2) */
 
 int	key_hook(int keycode, t_game **game)
 {
@@ -36,11 +34,5 @@ int	key_hook(int keycode, t_game **game)
 int	exit_hook(t_game **game)
 {
 	quit_game(*game);
-	return (1);
-}
-
-int	expose_hook(void)
-{
-	printf("it works baby !\n");
 	return (1);
 }

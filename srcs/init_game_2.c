@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 12:29:26 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/03/02 12:42:41 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/03/05 14:56:25 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,12 @@ void	load_textures(t_game *game, t_img **image, char *path, int iter)
 	(*image)->id = mlx_xpm_file_to_image(game->mlx, path, &width, &height);
 	if (!((*image)->id))
 	{
-		display_error_message("Img failed to import from xpm file\n");
-		free_images(game, iter);
+		display_error_message("Failed to import img from xpm file\n");
+		if (iter == 1)
+			free(game->img_space);
+		else
+			free_images(game, iter);
+		free(game->map);
 		free(game);
 		exit(1);
 	}
