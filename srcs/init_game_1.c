@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 15:03:25 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/03/05 15:02:37 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/03/06 18:01:26 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ void	init_window(t_game *game)
 	i = 0;
 	x = 0;
 	y = 0;
-	while (game->map[i])
+	while (game->map->map_arr[i])
 	{
 		y += game->img_space->height;
 		i++;
 	}
 	game->wdw_y = y;
 	i = 0;
-	while (game->map[0][i])
+	while (game->map->map_arr[0][i])
 	{
 		x += game->img_space->width;
 		i++;
@@ -44,14 +44,15 @@ void	init_window(t_game *game)
 void	populate_game(t_game *game)
 {
 	t_pl_coord		*coord;
-	
+
 	init_window(game);
 	coord = (t_pl_coord *)malloc(sizeof(t_pl_coord));
 	if (!coord)
 	{
 		free_images(game, 5);
-		free(game);
+		free(game->map->map_arr);
 		free(game->map);
+		free(game);
 		display_error_message("Malloc error (allocation of t_player_coord)\n");
 		exit(1);
 	}
@@ -74,7 +75,6 @@ void	init_game(t_map_parse *map)
 		exit(1);
 	}
 	init_game_struct(game, map);
-	free(map);
 	game->mlx = mlx_init();
 	init_textures(game);
 	populate_game(game);

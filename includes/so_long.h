@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:28:29 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/03/04 16:00:27 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/03/06 18:02:17 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ typedef struct s_game
 	t_img			*img_coll;
 	t_img			*img_exit;
 	t_img			*img_psp;
-	char			**map;
+	t_pl_coord		*coord;
+	t_map_parse		*map;
 	int				total_moves;
 	int				nb_coll;
-	t_pl_coord		*coord;
 }					t_game;
 
 /* check map_validity 1 and 2 */
@@ -85,7 +85,7 @@ void	ft_undercoat(t_game *game);
 /* init_structs */
 
 void	init_map_struct(t_map_parse *map);
-int		init_game_struct(t_game *game, t_map_parse *map);
+void	init_game_struct(t_game *game, t_map_parse *map);
 void	init_coord_struct(t_game *game, t_pl_coord *coord);
 
 /* display map */
@@ -116,5 +116,6 @@ void	handle_exit_pos(t_game *game);
 char	*get_all_lines(int fd);
 void	display_error_message(char *error_message);
 void	free_images(t_game *game, int num_img);
+void	free_split(char **split);
 
 #endif

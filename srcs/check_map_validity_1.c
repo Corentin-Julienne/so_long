@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:28:33 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/03/04 12:46:50 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/03/06 17:30:17 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int	check_map_validity_2(t_map_parse *map, int fd)
 {
 	if (close(fd) == -1)
 	{
+		free(map->lines);
 		free(map);
 		display_error_message("Fd could not be closed\n");
 		exit(1);

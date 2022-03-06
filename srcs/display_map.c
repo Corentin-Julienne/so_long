@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 16:43:11 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/03/02 16:22:53 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/03/06 17:38:18 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,16 @@ void	fulfill_wdw(t_game *game, int x, int y)
 
 	i = x / (game->img_space->width);
 	j = y / (game->img_space->height);
-	if (game->map[j][i] == '1')
+	if (game->map->map_arr[j][i] == '1')
 		mlx_put_image_to_window(game->mlx, game->wdw,
 			game->img_wall->id, x, y);
-	else if (game->map[j][i] == 'P')
+	else if (game->map->map_arr[j][i] == 'P')
 		mlx_put_image_to_window(game->mlx, game->wdw,
 			game->img_psp->id, x, y);
-	else if (game->map[j][i] == 'C')
+	else if (game->map->map_arr[j][i] == 'C')
 		mlx_put_image_to_window(game->mlx, game->wdw,
 			game->img_coll->id, x, y);
-	else if (game->map[j][i] == 'E')
+	else if (game->map->map_arr[j][i] == 'E')
 		mlx_put_image_to_window(game->mlx, game->wdw,
 			game->img_exit->id, x, y);
 }

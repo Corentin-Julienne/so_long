@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 12:07:29 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/03/05 14:49:25 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/03/06 18:02:10 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,21 @@ void	free_images(t_game *game, int num_img)
 		free(game->img_coll);
 		free(game->img_exit);
 	}
+}
+
+void	free_split(char **split)
+{
+	int		len;
+	int		i;
+
+	len = 0;
+	while (split[len])
+		len++;
+	i = 0;
+	while (i < len)
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
 }

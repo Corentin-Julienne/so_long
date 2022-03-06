@@ -6,16 +6,17 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 20:09:18 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/03/05 15:07:01 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/03/06 17:57:02 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void	quit_game(t_game *game) // change this
+void	quit_game(t_game *game)
 {
 	free_images(game, 5);
-	mlx_clear_window(game->mlx, game->wdw);
+	mlx_destroy_window(game->mlx, game->wdw);
+	free_split(game->map->map_arr);
 	free(game->map);
 	free(game->coord);
 	free(game);
