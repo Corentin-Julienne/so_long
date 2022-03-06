@@ -6,7 +6,7 @@
 #    By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/20 17:28:24 by cjulienn          #+#    #+#              #
-#    Updated: 2022/03/06 17:43:52 by cjulienn         ###   ########.fr        #
+#    Updated: 2022/03/06 18:05:06 by cjulienn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRCS= ./srcs/so_long.c \
 	  ./srcs/init_game_2.c \
 	  ./srcs/utils.c \
 	  ./srcs/display_map.c \
-	  ./srcs/player_inputs.c \
+	  ./srcs/handle_events.c \
 	  ./srcs/player_moves_1.c \
 	  ./srcs/player_moves_2.c \
 	  ./srcs/init_structs.c
