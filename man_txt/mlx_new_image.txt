@@ -23,7 +23,7 @@ DESCRIPTION
 
 mlx_new_image() creates a new image in memory. It returns a void * identifier needed 
 to manipulate this image later. It only needs the size of the image to be created, using the
-widthn and height parameters, and the mlx_ptr connection identifier (see the mlx manual).
+width and height parameters, and the mlx_ptr connection identifier (see the mlx manual).
 
 The user can draw inside the image (see below), and can dump the image inside a 
 specified window at any time to display it on the screen. This is done using 

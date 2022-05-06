@@ -6,7 +6,7 @@
 #    By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/20 17:28:24 by cjulienn          #+#    #+#              #
-#    Updated: 2022/03/06 18:05:06 by cjulienn         ###   ########.fr        #
+#    Updated: 2022/05/06 13:36:08 by cjulienn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,6 @@ fclean:	clean
 	$(MAKE) -C $(LIBFT_PATH) fclean
 	$(RM) $(NAME)
 
-re:	fclean all
+re:	fclean $(NAME)
 
 .PHONY: all clean fclean re

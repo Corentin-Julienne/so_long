@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 15:03:25 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/03/06 18:01:26 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/05/06 17:07:02 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	populate_game(t_game *game)
 		free(game->map);
 		free(game);
 		display_error_message("Malloc error (allocation of t_player_coord)\n");
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	init_coord_struct(game, coord);
 	mlx_hook(game->wdw, 17, 0, exit_hook, &game);
@@ -72,7 +72,7 @@ void	init_game(t_map_parse *map)
 		free(map->map_arr);
 		free(map);
 		display_error_message("Malloc error (alloc of t_game_struct)\n");
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	init_game_struct(game, map);
 	game->mlx = mlx_init();

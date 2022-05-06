@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 12:07:29 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/03/06 18:02:10 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/05/06 17:10:17 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,44 +18,67 @@ or NULL if it fails a malloc or cannnot read */
 
 char	*get_all_lines(int fd)
 {
-	char		*rtn;
-	char		*buffer;
-	ssize_t		reader;
+	char	*next_line;
+	char	*all_lines;
+	char	*tmp;
 
-	rtn = NULL;
-	buffer = (char *)malloc(sizeof(char) * 2);
-	if (!buffer)
-		return (NULL);
-	reader = 1;
-	while (reader > 0)
+	all_lines = NULL;
+	while (next_line != NULL)
 	{
-		reader = read(fd, buffer, 1);
-		if (reader < 0)
-			ft_free_and_return(&buffer, NULL);
-		if (reader == 0)
-			break ;
-		buffer[1] = '\0';
-		if (!rtn)
-			rtn = ft_protec_strdup("");
-		rtn = ft_strjoin_and_free(rtn, buffer);
-		if (!rtn)
-			ft_free_and_return(&rtn, NULL);
+		next_line = get_next_line(fd);
+		if (!all_lines)
+			all_lines = ft_protec_strdup(next_line);
+		else
+		{
+			tmp = ft_strjoin(all_lines, next_line);
+			if (tmp)
+				free(all_lines);
+			all_lines = tmp;
+		}
+		if (!all_lines)
+			return (NULL);
 	}
-	free(buffer);
-	return (rtn);
+	return (all_lines);
 }
 
-/* display an error message and exit the programm while failure of any type */
+// char	*get_all_lines(int fd) // change that
+// {
+// 	char		*rtn;
+// 	char		*buffer;
+// 	ssize_t		reader;
+
+// 	rtn = NULL;
+// 	buffer = (char *)malloc(sizeof(char) * 2);
+// 	if (!buffer)
+// 		return (NULL);
+// 	reader = 1;
+// 	while (reader > 0)
+// 	{
+// 		reader = read(fd, buffer, 1);
+// 		if (reader < 0)
+// 			ft_free_and_return(&buffer, NULL);
+// 		if (reader == 0)
+// 			break ;
+// 		buffer[1] = '\0';
+// 		if (!rtn)
+// 			rtn = ft_protec_strdup("");
+// 		rtn = ft_strjoin_and_free(rtn, buffer);
+// 		if (!rtn)
+// 			ft_free_and_return(&rtn, NULL);
+// 	}
+// 	free(buffer);
+// 	return (rtn);
+// }
+
+/* display an error message while failure of any type (on STDERR)*/
 
 void	display_error_message(char	*error_message)
 {
 	char	*prefix;
-	char	*message;
 
-	prefix = "Error\n";
-	message = ft_strjoin(prefix, error_message);
-	ft_printf("%s", message);
-	free(message);
+	prefix = "Error : ";
+	ft_putstr_fd(prefix, STDERR_FILENO);
+	ft_putstr_fd(error_message, STDERR_FILENO);
 }
 
 /* free image previously malloqued in case of malloc error 
@@ -79,6 +102,9 @@ void	free_images(t_game *game, int num_img)
 		free(game->img_exit);
 	}
 }
+
+/* free split is used for freeing an array of str
+when every str is also malloqued */
 
 void	free_split(char **split)
 {

@@ -6,11 +6,14 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:28:33 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/03/06 17:30:17 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/05/06 16:55:01 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+/* check if every line is the same length
+compared to the previous one */
 
 static void	is_map_rectangular(t_map_parse *map)
 {
@@ -30,6 +33,9 @@ static void	is_map_rectangular(t_map_parse *map)
 	}
 }
 
+/* check if map sourrounded by walls
+this func check only for right and left side of the map */
+
 static void	is_intermediate_walls(t_map_parse *map)
 {
 	int		len;
@@ -46,6 +52,10 @@ static void	is_intermediate_walls(t_map_parse *map)
 		j++;
 	}
 }
+
+/* check if map sourrounded by walls
+if map is not rectangular, stop checking
+this func check only the walls at the up and down side of the map */
 
 static void	is_walls(t_map_parse *map)
 {
@@ -81,7 +91,7 @@ int	check_map_validity_2(t_map_parse *map, int fd)
 		free(map->lines);
 		free(map);
 		display_error_message("Fd could not be closed\n");
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	map->map_arr = ft_split(map->lines, '\n');
 	if (!map->map_arr)
@@ -89,7 +99,7 @@ int	check_map_validity_2(t_map_parse *map, int fd)
 		display_error_message("Ft_split failed\n");
 		free(map->lines);
 		free(map);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	free(map->lines);
 	is_map_rectangular(map);
@@ -99,6 +109,10 @@ int	check_map_validity_2(t_map_parse *map, int fd)
 	return (0);
 }
 
+/* open the map, then cehck is formatted in .ber extension
+, then parse every line with gnl, then return the results
+in an array of str for checking that format constraitns are respected */
+
 int	check_map_validity(char **argv, t_map_parse *map)
 {
 	int		fd;
@@ -106,19 +120,19 @@ int	check_map_validity(char **argv, t_map_parse *map)
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 	{
-		display_error_message("Fd impossible to read\n");
+		perror("Error : ");
 		free(map);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	is_format_ber(argv, map, fd);
 	map->lines = get_all_lines(fd);
 	if (!map->lines)
 	{
-		free(map);
-		display_error_message("Problem while parsing map\n");
+		display_error_message("Allocation failure while parsing map\n");
 		if (close(fd) == -1)
-			display_error_message("Fd could not be closed\n");
-		exit(1);
+			perror("Error : ");
+		free(map);
+		exit(EXIT_FAILURE);
 	}
 	return (check_map_validity_2(map, fd));
 }

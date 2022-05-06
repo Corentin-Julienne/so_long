@@ -6,11 +6,14 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 17:50:22 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/03/06 18:01:43 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/05/06 17:05:16 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+/* this func init the game struct used to store imgs
+and various parameters */
 
 void	init_game_struct(t_game *game, t_map_parse *map)
 {	
@@ -34,12 +37,16 @@ void	init_game_struct(t_game *game, t_map_parse *map)
 		free(map->map_arr);
 		free(map);
 		free(game);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	game->total_moves = 0;
 	game->nb_coll = map->nb_coll;
 	game->map = map;
 }
+
+/* init the map structs with all infos about the num of 
+coll, player starting position, exit, and will be used
+to check to error during map parsing */
 
 void	init_map_struct(t_map_parse *map)
 {

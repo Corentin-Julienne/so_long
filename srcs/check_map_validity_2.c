@@ -6,11 +6,15 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 17:55:45 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/03/02 12:01:09 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/05/06 17:02:26 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+/* this function use a loop nested inside a loop in order to 
+1) count the num of exits, coll, and player starting pos
+2) check whether there is invalid characters (AKA not [0 1 E P C]) */
 
 void	count_items(t_map_parse *map)
 {
@@ -40,6 +44,9 @@ void	count_items(t_map_parse *map)
 	}
 }
 
+/* check if the 4 last char are .ber
+if not the case, free map, close file and return exit(EXIT_FAILURE) */
+
 void	is_format_ber(char **argv, t_map_parse *map, int fd)
 {
 	char	*title;
@@ -58,14 +65,16 @@ void	is_format_ber(char **argv, t_map_parse *map, int fd)
 	}
 	if (map->ber_format != 1)
 	{
-		free(map);
 		display_error_message("Map is not in ber format\n");
-		close(fd);
-		if (fd == -1)
-			display_error_message("Fd could not be closed\n");
-		exit(1);
+		if (close(fd) == -1)
+			perror("Error : ");
+		free(map);
+		exit(EXIT_FAILURE);
 	}
 }
+
+/*  check for errors in map struct 
+if encounters any error, prevent leaks, then exit(EXIT_FAILURE) */
 
 void	check_errors(t_map_parse *map)
 {
@@ -89,22 +98,24 @@ void	check_errors(t_map_parse *map)
 	{
 		free(map->map_arr);
 		free(map);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 }
+
+/* just print error msgs */
 
 void	map_error_messages(int error_type)
 {
 	if (error_type == 1)
-		ft_printf("Error\nMap not surrounded by walls\n");
+		display_error_message("Map not surrounded by walls\n");
 	if (error_type == 2)
-		ft_printf("Error\nPlayer starting position unexistant or plural\n");
+		display_error_message("Player starting position unexistant or plural\n");
 	if (error_type == 3)
-		ft_printf("Error\nNo collectible present\n");
+		display_error_message("No collectible present\n");
 	if (error_type == 4)
-		ft_printf("Error\nNo exit present\n");
+		display_error_message("No exit present\n");
 	if (error_type == 5)
-		ft_printf("Error\nNon rectangular map\n");
+		display_error_message("Non rectangular map\n");
 	if (error_type == 6)
-		ft_printf("Error\ninvalid character used in map\n");
+		display_error_message("Invalid character used in map\n");
 }

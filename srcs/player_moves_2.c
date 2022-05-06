@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 13:13:34 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/03/06 18:00:03 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/05/06 17:10:43 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 int	is_obstacle(t_game *game, int keycode)
 {
 	if (keycode == 13
-		 && game->map->map_arr[game->coord->j - 1][game->coord->i] == '1')
+		&& game->map->map_arr[game->coord->j - 1][game->coord->i] == '1')
 		return (1);
 	if (keycode == 1
-		 && game->map->map_arr[game->coord->j + 1][game->coord->i] == '1')
+		&& game->map->map_arr[game->coord->j + 1][game->coord->i] == '1')
 		return (1);
 	if (keycode == 2
-		 && game->map->map_arr[game->coord->j][game->coord->i + 1] == '1')
+		&& game->map->map_arr[game->coord->j][game->coord->i + 1] == '1')
 		return (1);
 	if (keycode == 0
-		 && game->map->map_arr[game->coord->j][game->coord->i - 1] == '1')
+		&& game->map->map_arr[game->coord->j][game->coord->i - 1] == '1')
 		return (1);
 	return (0);
 }

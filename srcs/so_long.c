@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:28:38 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/03/06 18:02:33 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/05/06 13:38:01 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 	{
 		display_error_message("Wrong number of arguments !\n");
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	map = (t_map_parse *)malloc(sizeof(t_map_parse));
 	if (!map)
 	{
 		display_error_message("Struct failed to be created\n");
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	init_map_struct(map);
 	check_map_validity(argv, map);

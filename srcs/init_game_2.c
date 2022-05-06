@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 12:29:26 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/03/06 17:35:44 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/05/06 17:06:14 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	load_textures(t_game *game, t_img **image, char *path, int iter)
 		free(game->map->map_arr);
 		free(game->map);
 		free(game);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	(*image)->width = width;
 	(*image)->height = height;
