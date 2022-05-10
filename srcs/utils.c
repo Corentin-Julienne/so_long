@@ -6,69 +6,61 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 12:07:29 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/05/06 17:10:17 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/05/10 19:39:24 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
 /* get_all_lines takes a fd as input and convert it to a single char 
-(malloqued) by using the read function, 
+(malloqued) by using the read function,
 or NULL if it fails a malloc or cannnot read */
 
-char	*get_all_lines(int fd)
+static void	check_empty_lines_err(char *next_line, char *all_lines,
+	t_map_parse *map, int fd)
+{
+	if (!next_line)
+		return ;
+	if (ft_strlen(next_line) == 1 && next_line[0] && next_line[0] == '\n')
+	{
+		display_error_message("Map has at least one empty line\n");
+		free(next_line);
+		if (all_lines)
+			free(all_lines);
+		free(map);
+		if (close(fd) == -1)
+			perror("Error : ");
+		exit(EXIT_FAILURE);
+	}
+}
+
+char	*get_all_lines(int fd, t_map_parse *map)
 {
 	char	*next_line;
 	char	*all_lines;
 	char	*tmp;
+	int		iter;
 
-	all_lines = NULL;
-	while (next_line != NULL)
+	next_line = NULL;
+	all_lines = ft_strdup("");
+	if (!all_lines)
+		return (NULL);
+	iter = 0;
+	while (next_line || iter == 0)
 	{
 		next_line = get_next_line(fd);
-		if (!all_lines)
-			all_lines = ft_protec_strdup(next_line);
-		else
+		check_empty_lines_err(next_line, all_lines, map, fd);
+		if (next_line)
 		{
 			tmp = ft_strjoin(all_lines, next_line);
-			if (tmp)
-				free(all_lines);
+			free(all_lines);
 			all_lines = tmp;
+			free(next_line);
 		}
-		if (!all_lines)
-			return (NULL);
+		iter++;
 	}
 	return (all_lines);
 }
-
-// char	*get_all_lines(int fd) // change that
-// {
-// 	char		*rtn;
-// 	char		*buffer;
-// 	ssize_t		reader;
-
-// 	rtn = NULL;
-// 	buffer = (char *)malloc(sizeof(char) * 2);
-// 	if (!buffer)
-// 		return (NULL);
-// 	reader = 1;
-// 	while (reader > 0)
-// 	{
-// 		reader = read(fd, buffer, 1);
-// 		if (reader < 0)
-// 			ft_free_and_return(&buffer, NULL);
-// 		if (reader == 0)
-// 			break ;
-// 		buffer[1] = '\0';
-// 		if (!rtn)
-// 			rtn = ft_protec_strdup("");
-// 		rtn = ft_strjoin_and_free(rtn, buffer);
-// 		if (!rtn)
-// 			ft_free_and_return(&rtn, NULL);
-// 	}
-// 	free(buffer);
-// 	return (rtn);
-// }
 
 /* display an error message while failure of any type (on STDERR)*/
 

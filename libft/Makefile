@@ -6,14 +6,13 @@
 #    By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/09 18:00:27 by cjulienn          #+#    #+#              #
-#    Updated: 2021/09/03 15:52:23 by cjulienn         ###   ########.fr        #
+#    Updated: 2022/05/06 17:15:18 by cjulienn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
 SRCS =	./get_next_line.c \
-		./gnl_utils/gnl_utils.c \
 		./ft_printf.c \
 		./printf_utils/conversions_1.c \
 		./printf_utils/conversions_2.c \

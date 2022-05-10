@@ -6,16 +6,22 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:28:38 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/05/06 13:38:01 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/05/10 19:33:50 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
+void	leaks_tracker(void) // kill after
+{
+	system("leaks so_long");
+}
+
 int	main(int argc, char **argv)
 {
 	t_map_parse	*map;
 
+	atexit(leaks_tracker); // kill after
 	if (argc != 2)
 	{
 		display_error_message("Wrong number of arguments !\n");

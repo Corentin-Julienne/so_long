@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:28:29 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/03/06 18:02:17 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/05/10 19:19:47 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ typedef struct s_img
 
 typedef struct s_pl_coord
 {
-	int				j;
 	int				i;
+	int				j;
 }					t_pl_coord;
 
 typedef struct s_map_parse
@@ -113,7 +113,7 @@ void	handle_exit_pos(t_game *game);
 
 /* utils */
 
-char	*get_all_lines(int fd);
+char	*get_all_lines(int fd, t_map_parse *map);
 void	display_error_message(char *error_message);
 void	free_images(t_game *game, int num_img);
 void	free_split(char **split);

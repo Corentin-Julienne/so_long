@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:28:33 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/05/06 16:55:01 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/05/10 19:52:35 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	check_map_validity_2(t_map_parse *map, int fd)
 	map->map_arr = ft_split(map->lines, '\n');
 	if (!map->map_arr)
 	{
-		display_error_message("Ft_split failed\n");
+		display_error_message("Split failed\n");
 		free(map->lines);
 		free(map);
 		exit(EXIT_FAILURE);
@@ -125,7 +125,7 @@ int	check_map_validity(char **argv, t_map_parse *map)
 		exit(EXIT_FAILURE);
 	}
 	is_format_ber(argv, map, fd);
-	map->lines = get_all_lines(fd);
+	map->lines = get_all_lines(fd, map);
 	if (!map->lines)
 	{
 		display_error_message("Allocation failure while parsing map\n");

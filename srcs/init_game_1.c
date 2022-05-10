@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 15:03:25 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/05/06 17:07:02 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/05/10 19:35:21 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	populate_game(t_game *game)
 	if (!coord)
 	{
 		free_images(game, 5);
-		free(game->map->map_arr);
+		free_split(game->map->map_arr);
 		free(game->map);
 		free(game);
 		display_error_message("Malloc error (allocation of t_player_coord)\n");
@@ -69,7 +69,7 @@ void	init_game(t_map_parse *map)
 	game = (t_game *)malloc(sizeof(t_game));
 	if (!game)
 	{
-		free(map->map_arr);
+		free_split(map->map_arr);
 		free(map);
 		display_error_message("Malloc error (alloc of t_game_struct)\n");
 		exit(EXIT_FAILURE);

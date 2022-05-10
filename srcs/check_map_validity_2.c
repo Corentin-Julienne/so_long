@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 17:55:45 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/05/06 17:02:26 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/05/10 19:44:02 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	check_errors(t_map_parse *map)
 		|| map->nb_exit <= 0 || map->nb_rect_error != 0
 		|| map->nb_inv_char != 0)
 	{
-		free(map->map_arr);
+		free_split(map->map_arr);
 		free(map);
 		exit(EXIT_FAILURE);
 	}

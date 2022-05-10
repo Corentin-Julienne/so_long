@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/19 13:28:45 by cjulienn          #+#    #+#             */
-/*   Updated: 2022/05/06 16:14:37 by cjulienn         ###   ########.fr       */
+/*   Created: 2022/05/10 18:08:16 by cjulienn          #+#    #+#             */
+/*   Updated: 2022/05/10 19:22:24 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static char	*ft_protec_strchr(const char *s, int c)
 {
-	char		*new_ptr;
-	char		d;
-	size_t		i;
+	char	*new_ptr;
+	char	d;
+	size_t	i;
 
 	i = 0;
 	if (!s)
@@ -39,12 +39,12 @@ static char	*ft_protec_strchr(const char *s, int c)
 
 static char	*obtain_line(char *relic)
 {
-	int			i;
-	int			j;
-	char		*line;
+	int		i;
+	int		j;
+	char	*line;
 
 	if (!ft_protec_strchr(relic, '\n'))
-		return (ft_protec_strdup(relic));
+		return (ft_strdup(relic));
 	i = 0;
 	while (relic[i] != '\n')
 		i++;
@@ -67,13 +67,14 @@ static char	*obtain_relic(char *relic)
 	char		*new_relic;
 	char		*cutted_relic;
 
-	new_relic = ft_protec_strdup(ft_strchr(relic, '\n'));
-	free(relic);
+	new_relic = ft_strdup(ft_protec_strchr(relic, '\n'));
+	if (relic)
+		free(relic);
 	if (!new_relic)
 		return (NULL);
 	if (ft_strlen(new_relic) > 1)
 	{
-		cutted_relic = ft_protec_strdup(new_relic + 1);
+		cutted_relic = ft_strdup(new_relic + 1);
 		free(new_relic);
 		return (cutted_relic);
 	}
@@ -83,6 +84,14 @@ static char	*obtain_relic(char *relic)
 
 static char	*handle_output(ssize_t reader, char *relic, char *line)
 {
+	if (reader == -1)
+	{
+		if (relic)
+			free(relic);
+		return (NULL);
+	}
+	if (!relic && !line)
+		return (NULL);
 	if (reader == 0 && !relic && line[0] == '\0')
 	{
 		free(line);
@@ -96,20 +105,24 @@ char	*get_next_line(int fd)
 	char			buffer[BUFFER_SIZE + 1];
 	static char		*relic = NULL;
 	char			*line;
+	char			*tmp;
 	ssize_t			reader;
 
+	reader = 1;
 	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (NULL);
-	reader = 1;
 	while (ft_protec_strchr(relic, '\n') == NULL && reader > 0)
 	{
 		reader = read(fd, buffer, BUFFER_SIZE);
 		if (reader == -1)
-			return (NULL);
+			return (handle_output(reader, relic, NULL));
 		buffer[reader] = '\0';
 		if (!relic)
-			relic = ft_protec_strdup("");
-		relic = ft_strjoin_and_free(relic, buffer);
+			relic = ft_strdup("");
+		tmp = ft_strjoin(relic, buffer);
+		if (relic)
+			free(relic);
+		relic = tmp;
 	}
 	line = obtain_line(relic);
 	relic = obtain_relic(relic);

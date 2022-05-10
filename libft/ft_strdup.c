@@ -6,7 +6,7 @@
 /*   By: cjulienn <cjulienn@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 13:00:53 by cjulienn          #+#    #+#             */
-/*   Updated: 2021/08/23 19:46:25 by cjulienn         ###   ########.fr       */
+/*   Updated: 2022/05/10 18:09:54 by cjulienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@ char	*ft_strdup(const char *s1)
 	char				*copy;
 	unsigned long		sizer;
 
+	if (!s1)
+		return (NULL);
 	sizer = ft_strlen(s1) + 1;
 	copy = malloc(sizer * (sizeof(char)));
-	if (!(copy))
+	if (!copy)
 		return (NULL);
 	ft_strcpy(copy, s1);
 	return (copy);
